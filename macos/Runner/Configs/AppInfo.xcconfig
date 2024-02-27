@@ -8,7 +8,7 @@
 PRODUCT_NAME = najlepsza_pizza_wg_andrzeja
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = com.example.najlepszaPizzaWgAndrzeja
+PRODUCT_BUNDLE_IDENTIFIER = com.andrzejcybulski.najlepszaPizzaWgAndrzeja
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2024 com.example. All rights reserved.
+PRODUCT_COPYRIGHT = Copyright © 2024 com.andrzejcybulski. All rights reserved.

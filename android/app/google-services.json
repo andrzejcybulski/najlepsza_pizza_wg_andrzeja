@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "320017821821",
+    "project_id": "najlepsza-pizza-wg-andrzeja1",
+    "storage_bucket": "najlepsza-pizza-wg-andrzeja1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:320017821821:android:face4b9ac6531b3240c114",
+        "android_client_info": {
+          "package_name": "com.andrzejcybulski.najlepsza_pizza_wg_andrzeja"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCR7IrESm7WLumVaBsEOEkbJCra0dYtr70"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
