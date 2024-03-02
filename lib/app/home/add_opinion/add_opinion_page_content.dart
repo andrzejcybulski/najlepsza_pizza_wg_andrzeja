@@ -8,8 +8,10 @@ class AddOpinionPageContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Dwa'),
+    return const Column(
+      children: [
+        Text('Dwa'),
+      ],
     );
   }
 }
