@@ -24,16 +24,26 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
+        backgroundColor: Colors.blue,
         title: Builder(
           builder: (context) {
             if (currentIndex == 0) {
-              return const Text('Najlepsza pizza wg Andrzeja - OPINIE');
+              return const Text(
+                'Najlepsza pizza wg Andrzeja - OPINIE',
+                style: TextStyle(color: Colors.white, fontSize: 20),
+              );
             }
             if (currentIndex == 1) {
-              return const Text('Najlepsza pizza wg Andrzeja - DODAJ');
+              return const Text(
+                'Najlepsza pizza wg Andrzeja - DODAJ',
+                style: TextStyle(color: Colors.white, fontSize: 20),
+              );
             }
 
-            return const Text('Najlepsza pizza wg Andrzeja - KONTO');
+            return const Text(
+              'Najlepsza pizza wg Andrzeja - KONTO',
+              style: TextStyle(color: Colors.white, fontSize: 20),
+            );
           },
         ),
       ),

@@ -5,15 +5,17 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class RestaurantsPageContent extends StatelessWidget {
-  RestaurantsPageContent({
+  const RestaurantsPageContent({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-        stream:
-            FirebaseFirestore.instance.collection('restaurants').snapshots(),
+        stream: FirebaseFirestore.instance
+            .collection('restaurants')
+            .orderBy('rating', descending: true)
+            .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             return const Center(child: Text('Something went wrong'));
@@ -149,11 +151,9 @@ class RestaurantsPageContent extends StatelessWidget {
 // }
 
 // class _UpdateWidgetState extends State<UpdateWidget> {
-//   final updateRestaurantController = TextEditingController();
-
-//   final updatePizzaController = TextEditingController();
-
-//   final updateDescriptionController = TextEditingController();
+//   var updateRestaurantName = '';
+//   var updatePizzaName = '';
+//   var updateDescription = '';
 
 //   @override
 //   Widget build(BuildContext context) {
@@ -184,43 +184,44 @@ class RestaurantsPageContent extends StatelessWidget {
 //                     child: Column(
 //                       children: <Widget>[
 //                         TextField(
-//                             controller: TextEditingController(
-//                                 text: widget.document['name']),
-//                             decoration:
-//                                 const InputDecoration(hintText: 'Restauracja')),
+//                           controller: TextEditingController(
+//                               text: widget.document['name']),
+//                           decoration:
+//                               const InputDecoration(hintText: 'Restauracja'),
+//                         ),
 //                         TextField(
-//                             controller: TextEditingController(
-//                                 text: widget.document['pizza']),
-//                             decoration:
-//                                 const InputDecoration(hintText: 'Pizza')),
+//                           controller: TextEditingController(
+//                               text: widget.document['pizza']),
+//                           decoration: const InputDecoration(hintText: 'Pizza'),
+//                         ),
 //                         TextField(
-//                             controller: TextEditingController(
-//                                 text: widget.document.id[2]),
-//                             decoration:
-//                                 const InputDecoration(hintText: 'Opis')),
+//                           controller: TextEditingController(
+//                               text: widget.document['description']),
+//                           decoration: const InputDecoration(hintText: 'Opis'),
+//                         ),
 //                       ],
 //                     ),
 //                   ),
 //                   SizedBox(height: 20),
 //                   ElevatedButton(
 //                       onPressed: () {
-//                         final data = {
-//                           'name': updateRestaurantController,
-//                           'pizza': updatePizzaController,
-//                           'description': updateDescriptionController.text,
-//                         };
+//                         // final data = {
+//                         //   'name': updateRestaurantName,
+//                         //   'pizza': updatePizzaName,
+//                         //   'description': updateDescription,
+//                         // };
 
 //                         FirebaseFirestore.instance
 //                             .collection("restaurants")
-//                             .doc(widget.document.id[0])
+//                             .doc('name')
 //                             .update;
 //                         FirebaseFirestore.instance
 //                             .collection("restaurants")
-//                             .doc(widget.document['pizza'])
+//                             .doc('pizza')
 //                             .update;
 //                         FirebaseFirestore.instance
 //                             .collection("restaurants")
-//                             .doc(widget.document[2])
+//                             .doc('restaurants')
 //                             .update;
 //                       },
 //                       child: Text('Zaktualizuj'))

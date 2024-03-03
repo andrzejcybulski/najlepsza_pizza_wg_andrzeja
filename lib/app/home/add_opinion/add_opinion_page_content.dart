@@ -14,60 +14,82 @@ class _AddOpinionPageContentState extends State<AddOpinionPageContent> {
   var restaurantName = '';
   var pizzaName = '';
   var descriptionName = '';
+  var rating = 5.5;
 
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          TextField(
-            decoration: const InputDecoration(
-              hintText: 'Restauracja',
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TextField(
+              decoration: const InputDecoration(
+                hintText: 'Restauracja',
+              ),
+              onChanged: (newValue) {
+                setState(() {
+                  restaurantName = newValue;
+                });
+              },
             ),
-            onChanged: (newValue) {
-              setState(() {
-                restaurantName = newValue;
-              });
-            },
-          ),
-          TextField(
-            decoration: const InputDecoration(
-              hintText: 'Pizza',
+            TextField(
+              decoration: const InputDecoration(
+                hintText: 'Pizza',
+              ),
+              onChanged: (newValue) {
+                setState(() {
+                  pizzaName = newValue;
+                });
+              },
             ),
-            onChanged: (newValue) {
-              setState(() {
-                pizzaName = newValue;
-              });
-            },
-          ),
-          TextField(
-            decoration: const InputDecoration(
-              hintText: 'Opis',
+            TextField(
+              decoration: const InputDecoration(
+                hintText: 'Opis',
+              ),
+              onChanged: (newValue) {
+                setState(() {
+                  descriptionName = newValue;
+                });
+              },
             ),
-            onChanged: (newValue) {
-              setState(() {
-                descriptionName = newValue;
-              });
-            },
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          ElevatedButton(
-            onPressed: () {
-              final data = {
-                'name': restaurantName,
-                'pizza': pizzaName,
-                'rating': 4,
-                'description': descriptionName,
-              };
+            const SizedBox(
+              height: 30,
+            ),
+            SliderTheme(
+              data: const SliderThemeData(
+                  valueIndicatorShape: PaddleSliderValueIndicatorShape()),
+              child: Slider(
+                min: 1,
+                max: 10,
+                divisions: 18,
+                value: rating,
+                label: rating.toString(),
+                onChanged: (newValue) {
+                  setState(() {
+                    rating = newValue;
+                  });
+                },
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            ElevatedButton(
+              onPressed: () {
+                final data = {
+                  'name': restaurantName,
+                  'pizza': pizzaName,
+                  'rating': rating,
+                  'description': descriptionName,
+                };
 
-              FirebaseFirestore.instance.collection('restaurants').add(data);
-            },
-            child: const Text('Dodaj opinię'),
-          ),
-        ],
+                FirebaseFirestore.instance.collection('restaurants').add(data);
+              },
+              child: const Text('Dodaj opinię'),
+            ),
+          ],
+        ),
       ),
     );
   }
