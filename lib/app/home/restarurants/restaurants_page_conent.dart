@@ -40,9 +40,9 @@ class RestaurantsPageContent extends StatelessWidget {
                         .delete();
                   },
                   child: Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: SingleChildScrollView(
-                          child: Stack(
+                    padding: const EdgeInsets.all(5.0),
+                    child: SingleChildScrollView(
+                      child: Stack(
                         clipBehavior: Clip.none,
                         children: <Widget>[
                           GestureDetector(
@@ -108,28 +108,30 @@ class RestaurantsPageContent extends StatelessWidget {
                                 },
                                 child: const Icon(Icons.delete, size: 20),
                               )),
-                          // Positioned(
-                          //   bottom: -15,
-                          //   right: 170,
-                          //   child: ElevatedButton(
-                          //     style: ElevatedButton.styleFrom(
-                          //       shape: const CircleBorder(
-                          //         side: BorderSide(width: 36),
-                          //       ),
-                          //     ),
-                          //     onPressed: () {
-                          //       showDialog(
-                          //         context: context,
-                          //         builder: (BuildContext context) {
-                          //           return UpdateWidget(document: document);
-                          //         },
-                          //       );
-                          //     },
-                          //     child: const Icon(Icons.edit, size: 20),
-                          //   ),
-                          // )
+                          Positioned(
+                            bottom: -15,
+                            right: 170,
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                shape: const CircleBorder(
+                                  side: BorderSide(width: 36),
+                                ),
+                              ),
+                              onPressed: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return UpdateWidget(document: document);
+                                  },
+                                );
+                              },
+                              child: const Icon(Icons.edit, size: 20),
+                            ),
+                          ),
                         ],
-                      ))),
+                      ),
+                    ),
+                  ),
                 ),
               ],
             ],
@@ -138,99 +140,99 @@ class RestaurantsPageContent extends StatelessWidget {
   }
 }
 
-// class UpdateWidget extends StatefulWidget {
-//   UpdateWidget({
-//     super.key,
-//     required this.document,
-//   });
+class UpdateWidget extends StatefulWidget {
+  const UpdateWidget({
+    super.key,
+    required this.document,
+  });
 
-//   final QueryDocumentSnapshot<Map<String, dynamic>> document;
+  final QueryDocumentSnapshot<Map<String, dynamic>> document;
 
-//   @override
-//   State<UpdateWidget> createState() => _UpdateWidgetState();
-// }
+  @override
+  State<UpdateWidget> createState() => _UpdateWidgetState();
+}
 
-// class _UpdateWidgetState extends State<UpdateWidget> {
-//   var updateRestaurantName = '';
-//   var updatePizzaName = '';
-//   var updateDescription = '';
+class _UpdateWidgetState extends State<UpdateWidget> {
+  var updateRestaurantName = '';
+  var updatePizzaName = '';
+  var updateDescription = '';
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Dialog(
-//       shape: RoundedRectangleBorder(
-//         borderRadius: BorderRadius.circular(
-//           15,
-//         ),
-//       ),
-//       backgroundColor: Colors.transparent,
-//       insetPadding: const EdgeInsets.all(10),
-//       child: SingleChildScrollView(
-//         child: Stack(
-//           clipBehavior: Clip.none,
-//           alignment: Alignment.center,
-//           children: <Widget>[
-//             Container(
-//               width: double.infinity,
-//               height: 700,
-//               decoration: BoxDecoration(
-//                   borderRadius: BorderRadius.circular(15),
-//                   border: Border.all(width: 2, color: Colors.white),
-//                   color: Colors.blueAccent),
-//               padding: const EdgeInsets.fromLTRB(20, 50, 20, 20),
-//               child: Column(
-//                 children: [
-//                   Form(
-//                     child: Column(
-//                       children: <Widget>[
-//                         TextField(
-//                           controller: TextEditingController(
-//                               text: widget.document['name']),
-//                           decoration:
-//                               const InputDecoration(hintText: 'Restauracja'),
-//                         ),
-//                         TextField(
-//                           controller: TextEditingController(
-//                               text: widget.document['pizza']),
-//                           decoration: const InputDecoration(hintText: 'Pizza'),
-//                         ),
-//                         TextField(
-//                           controller: TextEditingController(
-//                               text: widget.document['description']),
-//                           decoration: const InputDecoration(hintText: 'Opis'),
-//                         ),
-//                       ],
-//                     ),
-//                   ),
-//                   SizedBox(height: 20),
-//                   ElevatedButton(
-//                       onPressed: () {
-//                         // final data = {
-//                         //   'name': updateRestaurantName,
-//                         //   'pizza': updatePizzaName,
-//                         //   'description': updateDescription,
-//                         // };
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(
+          15,
+        ),
+      ),
+      backgroundColor: Colors.transparent,
+      insetPadding: const EdgeInsets.all(10),
+      child: SingleChildScrollView(
+        child: Stack(
+          clipBehavior: Clip.none,
+          alignment: Alignment.center,
+          children: <Widget>[
+            Container(
+              width: double.infinity,
+              height: 700,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  border: Border.all(width: 2, color: Colors.white),
+                  color: Colors.blueAccent),
+              padding: const EdgeInsets.fromLTRB(20, 50, 20, 20),
+              child: Column(
+                children: [
+                  Form(
+                    child: Column(
+                      children: <Widget>[
+                        TextField(
+                          controller: TextEditingController(
+                              text: widget.document['name']),
+                          decoration:
+                              const InputDecoration(hintText: 'Restauracja'),
+                        ),
+                        TextField(
+                          controller: TextEditingController(
+                              text: widget.document['pizza']),
+                          decoration: const InputDecoration(hintText: 'Pizza'),
+                        ),
+                        TextField(
+                          controller: TextEditingController(
+                              text: widget.document['description']),
+                          decoration: const InputDecoration(hintText: 'Opis'),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  ElevatedButton(
+                      onPressed: () {
+                        // final data = {
+                        //   'name': updateRestaurantName,
+                        //   'pizza': updatePizzaName,
+                        //   'description': updateDescription,
+                        // };
 
-//                         FirebaseFirestore.instance
-//                             .collection("restaurants")
-//                             .doc('name')
-//                             .update;
-//                         FirebaseFirestore.instance
-//                             .collection("restaurants")
-//                             .doc('pizza')
-//                             .update;
-//                         FirebaseFirestore.instance
-//                             .collection("restaurants")
-//                             .doc('restaurants')
-//                             .update;
-//                       },
-//                       child: Text('Zaktualizuj'))
-//                 ],
-//               ),
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
+                        FirebaseFirestore.instance
+                            .collection("restaurants")
+                            .doc('name')
+                            .update;
+                        FirebaseFirestore.instance
+                            .collection("restaurants")
+                            .doc('pizza')
+                            .update;
+                        FirebaseFirestore.instance
+                            .collection("restaurants")
+                            .doc('restaurants')
+                            .update;
+                      },
+                      child: const Text('Zaktualizuj'))
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

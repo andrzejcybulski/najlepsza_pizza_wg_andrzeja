@@ -4,7 +4,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class AddOpinionPageContent extends StatefulWidget {
   AddOpinionPageContent({
     super.key,
+    required this.onSave,
   });
+
+  final Function onSave;
 
   @override
   State<AddOpinionPageContent> createState() => _AddOpinionPageContentState();
@@ -20,75 +23,85 @@ class _AddOpinionPageContentState extends State<AddOpinionPageContent> {
   Widget build(BuildContext context) {
     return Center(
       child: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            TextField(
-              decoration: const InputDecoration(
-                hintText: 'Restauracja',
-              ),
-              onChanged: (newValue) {
-                setState(() {
-                  restaurantName = newValue;
-                });
-              },
-            ),
-            TextField(
-              decoration: const InputDecoration(
-                hintText: 'Pizza',
-              ),
-              onChanged: (newValue) {
-                setState(() {
-                  pizzaName = newValue;
-                });
-              },
-            ),
-            TextField(
-              decoration: const InputDecoration(
-                hintText: 'Opis',
-              ),
-              onChanged: (newValue) {
-                setState(() {
-                  descriptionName = newValue;
-                });
-              },
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            SliderTheme(
-              data: const SliderThemeData(
-                  valueIndicatorShape: PaddleSliderValueIndicatorShape()),
-              child: Slider(
-                min: 1,
-                max: 10,
-                divisions: 18,
-                value: rating,
-                label: rating.toString(),
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextField(
+                decoration: const InputDecoration(
+                  hintText: 'Restauracja',
+                ),
                 onChanged: (newValue) {
                   setState(() {
-                    rating = newValue;
+                    restaurantName = newValue;
                   });
                 },
               ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            ElevatedButton(
-              onPressed: () {
-                final data = {
-                  'name': restaurantName,
-                  'pizza': pizzaName,
-                  'rating': rating,
-                  'description': descriptionName,
-                };
+              TextField(
+                decoration: const InputDecoration(
+                  hintText: 'Pizza',
+                ),
+                onChanged: (newValue) {
+                  setState(() {
+                    pizzaName = newValue;
+                  });
+                },
+              ),
+              TextField(
+                decoration: const InputDecoration(
+                  hintText: 'Opis',
+                ),
+                onChanged: (newValue) {
+                  setState(() {
+                    descriptionName = newValue;
+                  });
+                },
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              SliderTheme(
+                data: const SliderThemeData(
+                    valueIndicatorShape: PaddleSliderValueIndicatorShape()),
+                child: Slider(
+                  min: 1,
+                  max: 10,
+                  divisions: 18,
+                  value: rating,
+                  label: rating.toString(),
+                  onChanged: (newValue) {
+                    setState(() {
+                      rating = newValue;
+                    });
+                  },
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              ElevatedButton(
+                onPressed: restaurantName.isEmpty ||
+                        pizzaName.isEmpty ||
+                        descriptionName.isEmpty
+                    ? null
+                    : () {
+                        final data = {
+                          'name': restaurantName,
+                          'pizza': pizzaName,
+                          'rating': rating,
+                          'description': descriptionName,
+                        };
 
-                FirebaseFirestore.instance.collection('restaurants').add(data);
-              },
-              child: const Text('Dodaj opinię'),
-            ),
-          ],
+                        FirebaseFirestore.instance
+                            .collection('restaurants')
+                            .add(data);
+                        widget.onSave();
+                      },
+                child: const Text('Dodaj opinię'),
+              ),
+            ],
+          ),
         ),
       ),
     );
