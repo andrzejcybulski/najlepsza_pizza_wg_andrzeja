@@ -4,10 +4,19 @@ import 'package:flutter/material.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class RestaurantsPageContent extends StatelessWidget {
-  const RestaurantsPageContent({
+class RestaurantsPageContent extends StatefulWidget {
+  RestaurantsPageContent({
     super.key,
   });
+
+  @override
+  State<RestaurantsPageContent> createState() => _RestaurantsPageContentState();
+}
+
+class _RestaurantsPageContentState extends State<RestaurantsPageContent> {
+  var updateRestaurantName = '';
+  var updatePizzaName = '';
+  var updateDescription = '';
 
   @override
   Widget build(BuildContext context) {
@@ -121,7 +130,113 @@ class RestaurantsPageContent extends StatelessWidget {
                                 showDialog(
                                   context: context,
                                   builder: (BuildContext context) {
-                                    return UpdateWidget(document: document);
+                                    return Dialog(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                          15,
+                                        ),
+                                      ),
+                                      backgroundColor: Colors.transparent,
+                                      insetPadding: const EdgeInsets.all(10),
+                                      child: SingleChildScrollView(
+                                        child: Stack(
+                                          clipBehavior: Clip.none,
+                                          alignment: Alignment.center,
+                                          children: <Widget>[
+                                            Container(
+                                              width: double.infinity,
+                                              height: 700,
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(15),
+                                                  border: Border.all(
+                                                      width: 2,
+                                                      color: Colors.white),
+                                                  color: Colors.blueAccent),
+                                              padding:
+                                                  const EdgeInsets.fromLTRB(
+                                                      20, 50, 20, 20),
+                                              child: Column(
+                                                children: [
+                                                  Form(
+                                                    child: Column(
+                                                      children: <Widget>[
+                                                        TextField(
+                                                          controller:
+                                                              TextEditingController(
+                                                                  text: document[
+                                                                      'name']),
+                                                          decoration:
+                                                              const InputDecoration(
+                                                                  hintText:
+                                                                      'Restauracja'),
+                                                        ),
+                                                        TextField(
+                                                          controller:
+                                                              TextEditingController(
+                                                                  text: document[
+                                                                      'pizza']),
+                                                          decoration:
+                                                              const InputDecoration(
+                                                                  hintText:
+                                                                      'Pizza'),
+                                                        ),
+                                                        TextField(
+                                                          controller:
+                                                              TextEditingController(
+                                                                  text: document[
+                                                                      'description']),
+                                                          decoration:
+                                                              const InputDecoration(
+                                                                  hintText:
+                                                                      'Opis'),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  const SizedBox(height: 20),
+                                                  ElevatedButton(
+                                                      onPressed: () {
+                                                        // final data = {
+                                                        //   'name': updateRestaurantName,
+                                                        //   'pizza': updatePizzaName,
+                                                        //   'description': updateDescription,
+                                                        // };
+
+                                                        FirebaseFirestore
+                                                            .instance
+                                                            .collection(
+                                                                "restaurants")
+                                                            .doc(
+                                                                'BRxYyaVUSqHg4C65PLzD')
+                                                            .update({
+                                                          'name':
+                                                              document['name']
+                                                        });
+
+                                                        FirebaseFirestore
+                                                            .instance
+                                                            .collection(
+                                                                "restaurants")
+                                                            .doc()
+                                                            .update;
+                                                        FirebaseFirestore
+                                                            .instance
+                                                            .collection(
+                                                                "restaurants")
+                                                            .doc(document[
+                                                                'restaurants'])
+                                                            .update;
+                                                      },
+                                                      child: const Text(
+                                                          'Zaktualizuj'))
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    );
                                   },
                                 );
                               },
@@ -215,15 +330,15 @@ class _UpdateWidgetState extends State<UpdateWidget> {
 
                         FirebaseFirestore.instance
                             .collection("restaurants")
-                            .doc('name')
+                            .doc(widget.document['name'])
                             .update;
                         FirebaseFirestore.instance
                             .collection("restaurants")
-                            .doc('pizza')
+                            .doc(widget.document['pizza'])
                             .update;
                         FirebaseFirestore.instance
                             .collection("restaurants")
-                            .doc('restaurants')
+                            .doc(widget.document['restaurants'])
                             .update;
                       },
                       child: const Text('Zaktualizuj'))
