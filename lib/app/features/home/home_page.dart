@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:najlepsza_pizza_wg_andrzeja/app/home/add_opinion/add_opinion_page_content.dart';
-import 'package:najlepsza_pizza_wg_andrzeja/app/home/my_account/my_account_page_content.dart';
-import 'package:najlepsza_pizza_wg_andrzeja/app/home/restarurants/restaurants_page_conent.dart';
+import 'package:najlepsza_pizza_wg_andrzeja/app/features/home/add_opinion/add_opinion_page_content.dart';
+import 'package:najlepsza_pizza_wg_andrzeja/app/features/home/my_account/my_account_page_content.dart';
+import 'package:najlepsza_pizza_wg_andrzeja/app/features/home/restarurants/restaurants_page_conent.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({
@@ -49,7 +49,7 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Builder(builder: (context) {
         if (currentIndex == 0) {
-          return RestaurantsPageContent();
+          return const RestaurantsPageContent();
         }
         if (currentIndex == 1) {
           return AddOpinionPageContent(onSave: () {

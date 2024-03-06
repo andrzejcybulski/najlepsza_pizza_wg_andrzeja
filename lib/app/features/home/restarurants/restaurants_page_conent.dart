@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:najlepsza_pizza_wg_andrzeja/app/home/restarurants/cubit/restaurants_cubit.dart';
+import 'package:najlepsza_pizza_wg_andrzeja/app/features/home/restarurants/cubit/restaurants_cubit.dart';
 
 class RestaurantsPageContent extends StatefulWidget {
   const RestaurantsPageContent({
